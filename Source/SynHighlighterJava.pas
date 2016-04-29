@@ -12,7 +12,7 @@ The Original Code is: SynHighlighterJava.pas, released 2000-04-10.
 The Original Code is based on the DcjSynJava.pas file from the
 mwEdit component suite by Martin Waldenburg and other developers, the Initial
 Author of this file is Michael Trier.
-Unicode translation by Maël Hörz.
+Unicode translation by MaÃ«l HÃ¶rz.
 All Rights Reserved.
 
 Contributors to the SynEdit and mwEdit projects are listed in the
@@ -153,7 +153,7 @@ type
     class function GetFriendlyLanguageName: UnicodeString; override;
   public
     constructor Create(AOwner: TComponent); override;
-    function GetDefaultAttribute(Index: integer): TSynHighlighterAttributes;    
+    function GetDefaultAttribute(Index: integer): TSynHighlighterAttributes;
       override;
     function GetEol: Boolean; override;
     function GetRange: Pointer; override;
@@ -196,22 +196,22 @@ uses
 
 const
   KeyWords: array[0..51] of UnicodeString = (
-    'abstract', 'assert', 'boolean', 'break', 'byte', 'case', 'catch', 'char', 
-    'class', 'const', 'continue', 'default', 'do', 'double', 'else', 'extends', 
-    'false', 'final', 'finally', 'float', 'for', 'goto', 'if', 'implements', 
-    'import', 'instanceof', 'int', 'interface', 'long', 'native', 'new', 'null', 
-    'package', 'private', 'protected', 'public', 'return', 'short', 'static', 
-    'strictfp', 'super', 'switch', 'synchronized', 'this', 'throw', 'throws', 
-    'transient', 'true', 'try', 'void', 'volatile', 'while' 
+    'abstract', 'assert', 'boolean', 'break', 'byte', 'case', 'catch', 'char',
+    'class', 'const', 'continue', 'default', 'do', 'double', 'else', 'extends',
+    'false', 'final', 'finally', 'float', 'for', 'goto', 'if', 'implements',
+    'import', 'instanceof', 'int', 'interface', 'long', 'native', 'new', 'null',
+    'package', 'private', 'protected', 'public', 'return', 'short', 'static',
+    'strictfp', 'super', 'switch', 'synchronized', 'this', 'throw', 'throws',
+    'transient', 'true', 'try', 'void', 'volatile', 'while'
   );
 
   KeyIndices: array[0..112] of Integer = (
-    1, -1, -1, 45, -1, -1, 39, -1, -1, -1, 9, 36, 26, -1, -1, 4, 27, 5, 50, 25, 
-    33, -1, 18, -1, 17, 6, 28, -1, -1, -1, 51, -1, -1, -1, -1, 21, 48, -1, 7, 3, 
-    -1, -1, -1, 49, 41, -1, 35, -1, 46, 40, -1, -1, -1, 42, -1, -1, -1, -1, -1, 
-    -1, 43, -1, -1, -1, -1, -1, 13, 24, -1, 37, -1, -1, 31, 11, -1, 22, -1, -1, 
-    -1, 44, -1, 10, 19, 8, -1, -1, 38, 15, -1, -1, 34, -1, 14, -1, -1, -1, 0, 
-    12, -1, 20, -1, 23, -1, 47, -1, -1, 29, 30, -1, -1, 16, 32, 2 
+    1, -1, -1, 45, -1, -1, 39, -1, -1, -1, 9, 36, 26, -1, -1, 4, 27, 5, 50, 25,
+    33, -1, 18, -1, 17, 6, 28, -1, -1, -1, 51, -1, -1, -1, -1, 21, 48, -1, 7, 3,
+    -1, -1, -1, 49, 41, -1, 35, -1, 46, 40, -1, -1, -1, 42, -1, -1, -1, -1, -1,
+    -1, 43, -1, -1, -1, -1, -1, 13, 24, -1, 37, -1, -1, 31, 11, -1, 22, -1, -1,
+    -1, 44, -1, 10, 19, 8, -1, -1, 38, 15, -1, -1, 34, -1, 14, -1, -1, -1, 0,
+    12, -1, 20, -1, 23, -1, 47, -1, -1, 29, 30, -1, -1, 16, 32, 2
   );
 
 {$Q-}
@@ -873,7 +873,7 @@ begin
         ',': CommaProc;
         '=': EqualProc;
         '>': GreaterProc;
-        'A'..'Z', 'a'..'z', '_', '$', 'À'..'Ö', 'Ø'..'ö', 'ø'..'ÿ': IdentProc;
+        'A'..'Z', 'a'..'z', '_', '$', 'Ã€'..'Ã–', 'Ã˜'..'Ã¶', 'Ã¸'..'Ã¿': IdentProc;
         #10: LFProc;
         '<': LowerProc;
         '-': MinusProc;
@@ -978,7 +978,7 @@ end;
 function TSynJavaSyn.IsIdentChar(AChar: WideChar): Boolean;
 begin
   case AChar of
-    '_', '$', '0'..'9', 'a'..'z', 'A'..'Z', 'À'..'Ö', 'Ø'..'ö', 'ø'..'ÿ':
+    '_', '$', '0'..'9', 'a'..'z', 'A'..'Z', 'Ã€'..'Ã–', 'Ã˜'..'Ã¶', 'Ã¸'..'Ã¿':
       Result := True;
     else
       Result := False;

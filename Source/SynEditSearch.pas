@@ -13,7 +13,7 @@ The Original Code is: SynEditSearch.pas, released 2000-04-07.
 The Original Code is based on the mwEditSearch.pas file from the mwEdit
 component suite by Martin Waldenburg and other developers.
 Portions created by Martin Waldenburg are Copyright 1999 Martin Waldenburg.
-Unicode translation by Maël Hörz.
+Unicode translation by MaÃ«l HÃ¶rz.
 All Rights Reserved.
 
 Contributors to the SynEdit project are listed in the Contributors.txt file.
@@ -48,7 +48,7 @@ uses
 {$IFDEF SYN_CLX}
   QSynEditTypes,
   QSynEditMiscClasses,
-  QSynUnicode,   
+  QSynUnicode,
 {$ELSE}
   SynEditTypes,
   SynEditMiscClasses,
@@ -163,14 +163,14 @@ begin
     inc(Look_at);
   end;
   fShiftInitialized := True;
-end;                                
+end;
 
 // TODO: would be more intelligent to use IsWordBreakChar for SynEdit
 function IsWordBreakChar(C: WideChar): Boolean;
 begin
   case C of
-    #0..#32, '.', ',', ';', ':', '"', '''', '´', '`', '°', '^', '!', '?', '&',
-    '$', '@', '§', '%', '#', '~', '[', ']', '(', ')', '{', '}', '<', '>',
+    #0..#32, '.', ',', ';', ':', '"', '''', 'Â´', '`', 'Â°', '^', '!', '?', '&',
+    '$', '@', 'Â§', '%', '#', '~', '[', ']', '(', ')', '{', '}', '<', '>',
     '-', '=', '+', '*', '/', '\', '|':
       Result := True;
     else
@@ -274,7 +274,7 @@ end;
 function TSynEditSearch.Replace(const aOccurrence, aReplacement: UnicodeString): UnicodeString;
 begin
   Result := aReplacement;
-end;                     
+end;
 
 function TSynEditSearch.FindFirst(const NewText: UnicodeString): Integer;
 begin
@@ -297,12 +297,12 @@ end;
 
 function TSynEditSearch.GetLength(Index: Integer): Integer;
 begin
-  Result := PatLen;  
+  Result := PatLen;
 end;
 
 function TSynEditSearch.GetPattern: UnicodeString;
 begin
-  Result := CasedPat; 
+  Result := CasedPat;
 end;
 
 procedure TSynEditSearch.SetOptions(const Value: TSynSearchOptions);
