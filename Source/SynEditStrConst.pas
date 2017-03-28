@@ -63,6 +63,7 @@ const
   SYNS_AttrAsmComment           =  'AsmComment';
   SYNS_AttrAsmKey               =  'AsmKey';
   SYNS_AttrAssembler            =  'Assembler';
+  SYNS_AttrAtRules              =  'AtRules';
   SYNS_AttrAttribute            =  'Attribute';
   SYNS_AttrAttributeName        =  'AttributeName';
   SYNS_AttrAttributeValue       =  'AttributeValue';
@@ -78,6 +79,7 @@ const
   SYNS_AttrComment              =  'Comment';
   SYNS_AttrCondition            =  'Condition';
   SYNS_AttrConditionalComment   =  'ConditionalComment';
+  SYNS_AttrConsoleOutput        =  'ConsoleOutput';
   SYNS_AttrDataType             =  'DataType';
   SYNS_AttrDebugLines           =  'DebuggingLines';
   SYNS_AttrDefaultPackage       =  'DefaultPackages';
@@ -128,12 +130,13 @@ const
   SYNS_AttrOperatorAndSymbols   =  'OperatorAndSymbols';
   SYNS_AttrOpLine               =  'OpLine';
   SYNS_AttrOptions              =  'Options';
-  SYNS_AttrPath                 =  'PathName';  
+  SYNS_AttrPath                 =  'PathName';
   SYNS_AttrPLSQL                =  'PLSQL-ReservedWord';
   SYNS_AttrPragma               =  'Pragma';
   SYNS_AttrPredefined           =  'Predefined';
   SYNS_AttrPreprocessor         =  'Preprocessor';
   SYNS_AttrProcessingInstr      =  'ProcessingInstruction';
+  SYNS_AttrProcName             =  'ProcName';
   SYNS_AttrProperty             =  'Property';
   SYNS_AttrQuad                 =  'Quad';
   SYNS_AttrQualifier            =  'Qualifier';
@@ -219,6 +222,7 @@ const
   SYNS_LangGeneral              =  'General';
   SYNS_LangPascal               =  'ObjectPascal';
   SYNS_LangX86Asm               =  'x86Assembly';
+  SYNS_LangMASM                 =  'x86Assembly MASM';
   SYNS_LangPython               =  'Python';
   SYNS_LangTclTk                =  'TclTk';
   SYNS_LangSQL                  =  'SQL';
@@ -275,6 +279,7 @@ resourcestring
   SYNS_FriendlyAttrAsmComment           =  'Asm Comment';
   SYNS_FriendlyAttrAsmKey               =  'Asm Key';
   SYNS_FriendlyAttrAssembler            =  'Assembler';
+  SYNS_FriendlyAttrAtRules              =  '@-Rules';
   SYNS_FriendlyAttrAttribute            =  'Attribute';
   SYNS_FriendlyAttrAttributeName        =  'Attribute Name';
   SYNS_FriendlyAttrAttributeValue       =  'Attribute Value';
@@ -289,6 +294,7 @@ resourcestring
   SYNS_FriendlyAttrComment              =  'Comment';
   SYNS_FriendlyAttrCondition            =  'Condition';
   SYNS_FriendlyAttrConditionalComment   =  'Conditional Comment';
+  SYNS_FriendlyAttrConsoleOutput        =  'Console output';
   SYNS_FriendlyAttrConstant             =  'Constant';
   SYNS_FriendlyAttrDataType             =  'Data Type';
   SYNS_FriendlyAttrDebugLines           =  'Debugging Lines';
@@ -346,6 +352,7 @@ resourcestring
   SYNS_FriendlyAttrPredefined           =  'Predefined';
   SYNS_FriendlyAttrPreprocessor         =  'Preprocessor';
   SYNS_FriendlyAttrProcessingInstr      =  'Processing Instruction';
+  SYNS_FriendlyAttrProcName             =  'Procedure name';
   SYNS_FriendlyAttrProperty             =  'Property';
   SYNS_FriendlyAttrQuad                 =  'Quad';
   SYNS_FriendlyAttrQualifier            =  'Qualifier';
@@ -510,6 +517,7 @@ resourcestring
   SYNS_FriendlyLangGeneral              =  'General';
   SYNS_FriendlyLangPascal               =  'Object Pascal';
   SYNS_FriendlyLangX86Asm               =  'x86 Assembly';
+  SYNS_FriendlyLangMASM                 =  'x86 Assembly MASM';
   SYNS_FriendlyLangPython               =  'Python';
   SYNS_FriendlyLangTclTk                =  'Tcl/Tk';
   SYNS_FriendlyLangSQL                  =  'SQL';

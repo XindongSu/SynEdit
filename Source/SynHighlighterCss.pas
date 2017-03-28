@@ -77,9 +77,9 @@ uses
   Classes;
 
 type
-  TtkTokenKind = (tkComment, tkProperty, tkSelector, tkSelectorAttrib, tkNull,
-    tkSpace, tkString, tkSymbol, tkText, tkUndefProperty, tkValue, tkColor,
-    tkNumber, tkImportant);
+  TtkTokenKind = (tkComment, tkAtRule, tkProperty, tkSelector, tkSelectorAttrib,
+    tkNull, tkSpace, tkString, tkSymbol, tkText, tkUndefProperty, tkValue,
+    tkColor, tkNumber, tkImportant);
 
   TRangeState = (rsComment, rsSelector, rsDeclaration, rsUnknown, rsProperty,
     rsValue, rsAttrib, rsParameter);
@@ -103,10 +103,12 @@ type
     fValueAttri: TSynHighlighterAttributes;
     fUndefPropertyAttri: TSynHighlighterAttributes;
     fImportantPropertyAttri: TSynHighlighterAttributes;
+    fAtRuleAttri: TSynHighlighterAttributes;
     fKeywords: TSynHashEntryList;
     procedure DoAddKeyword(AKeyword: UnicodeString; AKind: integer);
     function HashKey(Str: PWideChar): Integer;
     function IdentKind(MayBe: PWideChar): TtkTokenKind;
+    procedure AtRuleProc;
     procedure SelectorProc;
     procedure AttributeProc;
     procedure CommentProc;
@@ -131,6 +133,7 @@ type
     procedure PlusProc;
     procedure TildeProc;
     procedure PipeProc;
+    procedure CircumflexProc;
     procedure EqualProc;
     procedure ExclamProc;
   protected
@@ -162,6 +165,8 @@ type
       write fColorAttri;
     property NumberAttri: TSynHighlighterAttributes read fNumberAttri
       write fNumberAttri;
+    property AtRuleAttri: TSynHighlighterAttributes read fAtRuleAttri
+      write fAtRuleAttri;
     property SelectorAttri: TSynHighlighterAttributes read fSelectorAttri
       write fSelectorAttri;
     property AttributeAttri: TSynHighlighterAttributes read fAttributeAttri
@@ -584,6 +589,11 @@ begin
   fAttributeAttri.Foreground := $00ff0080;
   AddAttribute(fAttributeAttri);
 
+  fAtRuleAttri := TSynHighlighterAttributes.Create(SYNS_AttrAtRules, SYNS_FriendlyAttrAttribute);
+  fAtRuleAttri.Style := [];
+  fAtRuleAttri.Foreground := $00808000;
+  AddAttribute(fAtRuleAttri);
+
   fUndefPropertyAttri := TSynHighlighterAttributes.Create(
     SYNS_AttrUndefinedProperty, SYNS_FriendlyAttrUndefinedProperty);
   fUndefPropertyAttri.Style := [fsBold];
@@ -657,6 +667,7 @@ begin
       '~': TildeProc;
       '|': PipeProc;
       '=': EqualProc;
+      '^': CircumflexProc;
     end;
     Exit;
   end;
@@ -692,6 +703,16 @@ begin
   Inc(Run);
   fRange := rsAttrib;
   fTokenID := tkSymbol;
+end;
+
+procedure TSynCssSyn.CircumflexProc;
+begin
+  Inc(Run);
+  if fLine[Run] = '=' then
+  begin
+    Inc(Run);
+    fTokenID := tkSymbol;
+  end;
 end;
 
 procedure TSynCssSyn.CommentProc;
@@ -826,6 +847,32 @@ begin
   inc(Run);
 end;
 
+procedure TSynCssSyn.AtRuleProc;
+
+  function IsStopChar: Boolean;
+  begin
+    case fLine[Run] of
+      #0..#31, '{', ';':
+        Result := True;
+      else
+        Result := False;
+    end;
+  end;
+
+begin
+  if IsStopChar then
+  begin
+    case fLine[Run] of
+      #0..#31, '{', ';': SelectorProc;
+    end;
+    Exit;
+  end;
+
+  fTokenID := tkAtRule;
+  while not IsStopChar do
+    Inc(Run);
+end;
+
 procedure TSynCssSyn.SelectorProc;
 
   function IsStopChar: Boolean;
@@ -839,6 +886,20 @@ procedure TSynCssSyn.SelectorProc;
   end;
 
 begin
+  if fLine[Run] = '}' then
+  begin
+    Inc(Run);
+    fTokenID := tkSymbol;
+    Exit;
+  end;
+
+  if fLine[Run] = '@' then
+  begin
+    Inc(Run);
+    AtRuleProc;
+    Exit;
+  end;
+
   if IsStopChar then
   begin
     case fLine[Run] of
@@ -954,6 +1015,7 @@ begin
     else
       NextDeclaration;
   end;
+
   inherited;
 end;
 
@@ -1004,6 +1066,7 @@ function TSynCssSyn.GetTokenAttribute: TSynHighlighterAttributes;
 begin
   case fTokenID of
     tkComment: Result := fCommentAttri;
+    tkAtRule: Result := fAtRuleAttri;
     tkProperty: Result := fPropertyAttri;
     tkSelector: Result := fSelectorAttri;
     tkSelectorAttrib: Result := fAttributeAttri;
